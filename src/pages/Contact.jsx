@@ -13,10 +13,34 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission would be handled by Netlify
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact-inquiry',
+          ...formData
+        }).toString()
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ inquiryType: '', name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    }
+    
+    setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
@@ -45,26 +69,26 @@ const Contact = () => {
     {
       icon: FiInstagram,
       name: "Instagram",
-      url: "#"
+      url: "https://instagram.com/dailynoteshow"
     },
     {
       icon: FiTwitter,
       name: "X (Twitter)",
-      url: "#"
+      url: "https://x.com/dailynoteshow"
     },
     {
       icon: FiLinkedin,
       name: "LinkedIn",
-      url: "#"
+      url: "https://www.linkedin.com/company/the-daily-note-with-james-a-brown/"
     }
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-orange-50 to-red-50 py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -72,8 +96,7 @@ const Contact = () => {
           >
             Get In Touch
           </motion.h1>
-          
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -87,18 +110,30 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Daily Feedback</h2>
             
-            <form 
+            {submitStatus === 'success' && (
+              <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
+                <p className="text-green-800">Thank you! Your message has been sent successfully.</p>
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+                <p className="text-red-800">Sorry, there was an error sending your message. Please try again.</p>
+              </div>
+            )}
+
+            <form
               onSubmit={handleSubmit}
-              name="contact-inquiry" 
-              method="POST" 
-              data-netlify="true" 
+              name="contact-inquiry"
+              method="POST"
+              data-netlify="true"
               netlify-honeypot="bot-field"
               className="bg-gray-50 p-8 rounded-lg"
             >
@@ -111,12 +146,12 @@ const Contact = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Inquiry Type
                 </label>
-                <select 
+                <select
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 >
                   <option value="">Select inquiry type</option>
                   <option value="comment">Comment on the show</option>
@@ -133,13 +168,13 @@ const Contact = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Name
                 </label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
 
@@ -147,13 +182,13 @@ const Contact = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Email
                 </label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
 
@@ -161,28 +196,29 @@ const Contact = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Message
                 </label>
-                <textarea 
+                <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 ></textarea>
               </div>
 
-              <button 
+              <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center"
+                disabled={isSubmitting}
+                className="w-full bg-orange-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center disabled:opacity-50"
               >
                 <SafeIcon icon={FiSend} className="mr-2" />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -192,12 +228,12 @@ const Contact = () => {
             <div className="space-y-6 mb-8">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start">
-                  <div className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-lg mr-4">
-                    <SafeIcon icon={info.icon} className="h-5 w-5 text-blue-600" />
+                  <div className="flex items-center justify-center w-10 h-10 bg-orange-100 rounded-lg mr-4">
+                    <SafeIcon icon={info.icon} className="h-5 w-5 text-orange-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">{info.title}</h3>
-                    <a href={info.link} className="text-blue-600 hover:text-blue-800 transition-colors">
+                    <a href={info.link} className="text-orange-600 hover:text-orange-800 transition-colors">
                       {info.detail}
                     </a>
                   </div>
@@ -206,9 +242,9 @@ const Contact = () => {
             </div>
 
             {/* Share Your Observations */}
-            <div className="bg-blue-50 p-6 rounded-lg mb-8">
+            <div className="bg-orange-50 p-6 rounded-lg mb-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                <SafeIcon icon={FiMessageCircle} className="mr-2 text-blue-600" />
+                <SafeIcon icon={FiMessageCircle} className="mr-2 text-orange-600" />
                 Share Your Observations
               </h3>
               <p className="text-gray-700">
@@ -225,6 +261,8 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
                   >
                     <SafeIcon icon={social.icon} className="h-5 w-5 text-gray-600" />
@@ -236,7 +274,7 @@ const Contact = () => {
         </div>
 
         {/* Newsletter Signup */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -245,12 +283,12 @@ const Contact = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Subscribe & Stay Updated</h2>
           <p className="text-gray-600 mb-8">Get daily observations delivered to your inbox via Substack</p>
           <div className="flex justify-center">
-            <iframe 
-              src="https://jamesbrowntv.substack.com/embed" 
-              width="480" 
-              height="320" 
-              style={{border: '1px solid #EEE', background: 'white'}} 
-              frameBorder="0" 
+            <iframe
+              src="https://jamesbrowntv.substack.com/embed"
+              width="480"
+              height="320"
+              style={{ border: '1px solid #EEE', background: 'white' }}
+              frameBorder="0"
               scrolling="no"
               className="rounded-lg"
             ></iframe>
@@ -258,7 +296,7 @@ const Contact = () => {
         </motion.div>
 
         {/* Philosophy */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}

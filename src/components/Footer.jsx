@@ -17,16 +17,34 @@ const Footer = () => {
               on-air and online from sea to shining sea.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+                href="https://instagram.com/dailynoteshow" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <SafeIcon icon={FiInstagram} className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+                href="https://x.com/dailynoteshow" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <SafeIcon icon={FiTwitter} className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+                href="https://www.linkedin.com/company/the-daily-note-with-james-a-brown/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <SafeIcon icon={FiLinkedin} className="h-6 w-6" />
               </a>
-              <a href="mailto:support@thedailynote.net" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+                href="mailto:support@thedailynote.net" 
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <SafeIcon icon={FiMail} className="h-6 w-6" />
               </a>
             </div>

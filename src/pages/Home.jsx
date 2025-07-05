@@ -33,10 +33,20 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-orange-50 to-red-50 py-20 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1751699560502-DSCF1985.JPG" 
+            alt="James A. Brown" 
+            className="w-full h-full object-cover opacity-10"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-50/90 to-red-50/90"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -48,7 +58,7 @@ const Home = () => {
               </span>
             </motion.h1>
             
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -57,25 +67,25 @@ const Home = () => {
               Finding the extraordinary in the ordinary. 5 days a week, 90 seconds a day, 
               on-air and online from sea to shining sea.
             </motion.p>
-
-            <motion.div 
+            
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
             >
-              <Link 
-                to="/listen" 
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center"
+              <Link
+                to="/listen"
+                className="bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center shadow-lg"
               >
                 <SafeIcon icon={FiPlay} className="mr-2" />
                 Listen to Today's Episode
               </Link>
-              <a 
-                href="https://knowyourpowernow.com" 
+              <a
+                href="https://knowyourpowernow.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
+                className="bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center shadow-lg"
               >
                 <SafeIcon icon={FiBookOpen} className="mr-2" />
                 Get Know Your Power Course - $1,497 (Save $500)
@@ -88,15 +98,15 @@ const Home = () => {
       {/* Brief Description */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-lg text-gray-700 leading-relaxed"
           >
             Daily practice of paying attention to the small moments that reveal how our world really works. 
-            Genuine reflection for busy professionals who want to understand their world better, 
-            not just feel better about what they already believe.
+            Genuine reflection for busy professionals who want to understand their world better, not just feel better 
+            about what they already believe.
           </motion.p>
         </div>
       </section>
@@ -107,6 +117,7 @@ const Home = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Why The Daily Note?</h2>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {valueProps.map((prop, index) => (
               <motion.div
@@ -116,8 +127,8 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                  <SafeIcon icon={prop.icon} className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
+                  <SafeIcon icon={prop.icon} className="h-6 w-6 text-orange-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{prop.title}</h3>
                 <p className="text-gray-600">{prop.description}</p>
@@ -128,17 +139,17 @@ const Home = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-blue-600">
+      <section className="py-16 bg-orange-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-          <p className="text-xl text-blue-100 mb-8">Get daily observations delivered to your inbox</p>
+          <p className="text-xl text-orange-100 mb-8">Get daily observations delivered to your inbox</p>
           <div className="flex justify-center">
-            <iframe 
-              src="https://jamesbrowntv.substack.com/embed" 
-              width="480" 
-              height="320" 
-              style={{border: '1px solid #EEE', background: 'white'}} 
-              frameBorder="0" 
+            <iframe
+              src="https://jamesbrowntv.substack.com/embed"
+              width="480"
+              height="320"
+              style={{ border: '1px solid #EEE', background: 'white' }}
+              frameBorder="0"
               scrolling="no"
               className="rounded-lg"
             ></iframe>

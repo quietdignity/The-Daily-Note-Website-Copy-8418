@@ -34,7 +34,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-20">
+      <section className="bg-gradient-to-br from-orange-50 to-red-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -84,8 +84,8 @@ const About = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="bg-gray-50 p-6 rounded-lg"
               >
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                  <SafeIcon icon={highlight.icon} className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
+                  <SafeIcon icon={highlight.icon} className="h-6 w-6 text-orange-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{highlight.title}</h3>
                 <p className="text-gray-700">{highlight.description}</p>
@@ -101,13 +101,13 @@ const About = () => {
             className="bg-white border-2 border-gray-200 rounded-lg p-8"
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <SafeIcon icon={FiAward} className="mr-3 text-blue-600" />
+              <SafeIcon icon={FiAward} className="mr-3 text-orange-600" />
               Professional Background
             </h2>
             <ul className="space-y-3">
               {background.map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   <span className="text-gray-700">{item}</span>
                 </li>
               ))}
@@ -117,7 +117,7 @@ const About = () => {
       </section>
 
       {/* Quote Section */}
-      <section className="py-16 bg-blue-600">
+      <section className="py-16 bg-orange-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.blockquote 
             initial={{ opacity: 0, y: 20 }}

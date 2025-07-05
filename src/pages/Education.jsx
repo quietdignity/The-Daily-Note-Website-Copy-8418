@@ -36,7 +36,7 @@ const Education = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-blue-50 py-20">
+      <section className="bg-gradient-to-br from-orange-50 to-red-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -52,11 +52,11 @@ const Education = () => {
               </p>
               <div className="bg-white p-6 rounded-lg shadow-lg inline-block">
                 <div className="flex items-center justify-center mb-2">
-                  <SafeIcon icon={FiDollarSign} className="text-green-600 mr-2" />
+                  <SafeIcon icon={FiDollarSign} className="text-red-600 mr-2" />
                   <span className="text-3xl font-bold text-gray-900">$1,497</span>
                 </div>
                 <p className="text-gray-600 mb-4">Complete Course</p>
-                <p className="text-sm text-green-600 font-semibold">
+                <p className="text-sm text-red-600 font-semibold">
                   Regular Price: $1,997 - Save $500
                 </p>
               </div>
@@ -103,13 +103,13 @@ const Education = () => {
             className="mb-12"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <SafeIcon icon={FiTarget} className="mr-3 text-blue-600" />
+              <SafeIcon icon={FiTarget} className="mr-3 text-orange-600" />
               What You'll Learn
             </h3>
             <ul className="space-y-3">
               {whatYouLearn.map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <SafeIcon icon={FiCheck} className="text-green-600 mt-1 mr-3 flex-shrink-0" />
+                  <SafeIcon icon={FiCheck} className="text-red-600 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-gray-700">{item}</span>
                 </li>
               ))}
@@ -124,13 +124,13 @@ const Education = () => {
             className="mb-12 bg-gray-50 p-8 rounded-lg"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <SafeIcon icon={FiBook} className="mr-3 text-blue-600" />
+              <SafeIcon icon={FiBook} className="mr-3 text-orange-600" />
               Course Includes
             </h3>
             <ul className="space-y-3">
               {courseIncludes.map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <SafeIcon icon={FiCheck} className="text-green-600 mt-1 mr-3 flex-shrink-0" />
+                  <SafeIcon icon={FiCheck} className="text-red-600 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-gray-700">{item}</span>
                 </li>
               ))}
@@ -145,13 +145,13 @@ const Education = () => {
             className="mb-12"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <SafeIcon icon={FiUsers} className="mr-3 text-blue-600" />
+              <SafeIcon icon={FiUsers} className="mr-3 text-orange-600" />
               Who This Is For
             </h3>
             <ul className="space-y-3">
               {whoItsFor.map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   <span className="text-gray-700">{item}</span>
                 </li>
               ))}
@@ -163,7 +163,7 @@ const Education = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-blue-50 p-8 rounded-lg mb-12"
+            className="bg-orange-50 p-8 rounded-lg mb-12"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-4">James's Promise</h3>
             <blockquote className="text-lg text-gray-700 italic">
@@ -188,7 +188,7 @@ const Education = () => {
               href="https://knowyourpowernow.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center"
+              className="bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors inline-flex items-center"
             >
               <SafeIcon icon={FiCheck} className="mr-2" />
               Get Instant Access - $1,497 (Save $500)

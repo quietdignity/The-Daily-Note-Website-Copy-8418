@@ -22,23 +22,15 @@ const Listen = () => {
     {
       name: "Spotify",
       url: "https://open.spotify.com/show/5Impg5m0ZPEuE9ezKFcP5A"
-    },
-    {
-      name: "Google Podcasts",
-      url: "#"
-    },
-    {
-      name: "Amazon Music",
-      url: "#"
     }
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+      <section className="bg-gradient-to-br from-orange-50 to-red-50 py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -46,8 +38,7 @@ const Listen = () => {
           >
             Listen to The Daily Note
           </motion.h1>
-          
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,22 +52,21 @@ const Listen = () => {
       {/* Current Episodes */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Current Episodes</h2>
-            
             {/* Captivate FM Embed */}
             <div className="w-full h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
-              <iframe 
-                style={{width: '100%', height: '100%'}} 
-                frameBorder="no" 
-                scrolling="no" 
-                allow="clipboard-write" 
-                seamless 
+              <iframe
+                style={{ width: '100%', height: '100%' }}
+                frameBorder="no"
+                scrolling="no"
+                allow="clipboard-write"
+                seamless
                 src="https://player.captivate.fm/show/b56182bf-22f2-42e4-b14d-6eb32f52dd81/episodes"
                 className="rounded-lg"
               ></iframe>
@@ -84,7 +74,7 @@ const Listen = () => {
           </motion.div>
 
           {/* About the Show */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -103,7 +93,7 @@ const Listen = () => {
           </motion.div>
 
           {/* Recent Observations */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -113,7 +103,7 @@ const Listen = () => {
             <ul className="space-y-3">
               {recentObservations.map((observation, index) => (
                 <li key={index} className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   <span className="text-gray-700">{observation}</span>
                 </li>
               ))}
@@ -128,8 +118,8 @@ const Listen = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Subscribe on Your Favorite Platform</h2>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto">
             {platforms.map((platform, index) => (
               <motion.a
                 key={index}
@@ -141,7 +131,7 @@ const Listen = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center"
               >
-                <SafeIcon icon={FiHeadphones} className="mr-2 text-blue-600" />
+                <SafeIcon icon={FiHeadphones} className="mr-2 text-orange-600" />
                 <span className="font-medium text-gray-900">{platform.name}</span>
                 <SafeIcon icon={FiExternalLink} className="ml-2 text-gray-400" />
               </motion.a>
@@ -149,7 +139,7 @@ const Listen = () => {
           </div>
 
           {/* Email Signup */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -157,12 +147,12 @@ const Listen = () => {
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Get Episodes by Email</h3>
             <div className="flex justify-center">
-              <iframe 
-                src="https://jamesbrowntv.substack.com/embed" 
-                width="480" 
-                height="320" 
-                style={{border: '1px solid #EEE', background: 'white'}} 
-                frameBorder="0" 
+              <iframe
+                src="https://jamesbrowntv.substack.com/embed"
+                width="480"
+                height="320"
+                style={{ border: '1px solid #EEE', background: 'white' }}
+                frameBorder="0"
                 scrolling="no"
                 className="rounded-lg"
               ></iframe>
