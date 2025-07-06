@@ -7,39 +7,43 @@ const { FiMail, FiSend, FiInstagram, FiTwitter, FiLinkedin, FiMessageCircle } = 
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    inquiryType: '',
+    'inquiry-type': '',
     name: '',
     email: '',
     message: ''
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-          'form-name': 'contact-inquiry',
+          'form-name': 'contact',
           ...formData
         }).toString()
       });
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ inquiryType: '', name: '', email: '', message: '' });
+        setFormData({
+          'inquiry-type': '',
+          name: '',
+          email: '',
+          message: ''
+        });
       } else {
         setSubmitStatus('error');
       }
     } catch (error) {
       setSubmitStatus('error');
     }
-    
+
     setIsSubmitting(false);
   };
 
@@ -122,98 +126,110 @@ const Contact = () => {
                 <p className="text-green-800">Thank you! Your message has been sent successfully.</p>
               </div>
             )}
-            
+
             {submitStatus === 'error' && (
               <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
                 <p className="text-red-800">Sorry, there was an error sending your message. Please try again.</p>
               </div>
             )}
 
+            {/* Hidden form for Netlify */}
+            <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+              <input type="text" name="inquiry-type" />
+              <input type="text" name="name" />
+              <input type="email" name="email" />
+              <textarea name="message"></textarea>
+            </form>
+
             <form
-              onSubmit={handleSubmit}
-              name="contact-inquiry"
+              name="contact"
               method="POST"
               data-netlify="true"
-              netlify-honeypot="bot-field"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
               className="bg-gray-50 p-8 rounded-lg"
             >
-              <input type="hidden" name="form-name" value="contact-inquiry" />
-              <p hidden>
-                <label>Don't fill this out: <input name="bot-field" /></label>
-              </p>
+              <input type="hidden" name="form-name" value="contact" />
+              <div className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Inquiry Type
+                  <select
+                    name="inquiry-type"
+                    value={formData['inquiry-type']}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 mt-1"
+                  >
+                    <option value="">Select inquiry type</option>
+                    <option value="comment">Comment on the show</option>
+                    <option value="press">Press inquiry</option>
+                    <option value="speaking">Speaking engagement</option>
+                    <option value="advertising">Advertising/Sponsorship</option>
+                    <option value="course">Course question</option>
+                    <option value="general">General inquiry</option>
+                    <option value="technical">Technical support</option>
+                  </select>
                 </label>
-                <select
-                  name="inquiryType"
-                  value={formData.inquiryType}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                >
-                  <option value="">Select inquiry type</option>
-                  <option value="comment">Comment on the show</option>
-                  <option value="press">Press inquiry</option>
-                  <option value="speaking">Speaking engagement</option>
-                  <option value="advertising">Advertising/Sponsorship</option>
-                  <option value="course">Course question</option>
-                  <option value="general">General inquiry</option>
-                  <option value="technical">Technical support</option>
-                </select>
               </div>
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Name
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 mt-1"
+                  />
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
               </div>
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Email
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 mt-1"
+                  />
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
               </div>
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Your Message
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 mt-1"
+                  ></textarea>
                 </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                ></textarea>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-orange-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center disabled:opacity-50"
-              >
-                <SafeIcon icon={FiSend} className="mr-2" />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-orange-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center disabled:opacity-50"
+                >
+                  <SafeIcon icon={FiSend} className="mr-2" />
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
+              </div>
             </form>
           </motion.div>
 
@@ -233,7 +249,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">{info.title}</h3>
-                    <a href={info.link} className="text-orange-600 hover:text-orange-800 transition-colors">
+                    <a
+                      href={info.link}
+                      className="text-orange-600 hover:text-orange-800 transition-colors"
+                    >
                       {info.detail}
                     </a>
                   </div>
@@ -305,8 +324,7 @@ const Contact = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Philosophy</h2>
           <blockquote className="text-lg text-gray-700 italic max-w-4xl mx-auto">
             "The most important stories are often hiding in the details everyone else overlooks. 
-            The Daily Note is about developing the daily practice of paying attention to what those details 
-            reveal about how our world really works."
+            The Daily Note is about developing the daily practice of paying attention to what those details reveal about how our world really works."
           </blockquote>
         </motion.div>
       </div>

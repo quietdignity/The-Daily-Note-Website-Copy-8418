@@ -7,39 +7,43 @@ const { FiMic, FiUsers, FiClock, FiSend, FiCheck } = FiIcons;
 
 const Speaking = () => {
   const [formData, setFormData] = useState({
-    inquiryType: '',
+    'inquiry-type': '',
     name: '',
     email: '',
     message: ''
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-          'form-name': 'speaking-inquiry',
+          'form-name': 'speaking',
           ...formData
         }).toString()
       });
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ inquiryType: '', name: '', email: '', message: '' });
+        setFormData({
+          'inquiry-type': '',
+          name: '',
+          email: '',
+          message: ''
+        });
       } else {
         setSubmitStatus('error');
       }
     } catch (error) {
       setSubmitStatus('error');
     }
-    
+
     setIsSubmitting(false);
   };
 
@@ -110,10 +114,9 @@ const Speaking = () => {
                 Insights for teams navigating complexity
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                James brings his unique perspective to organizations seeking authentic leadership 
-                and effective communication strategies. Drawing from his experience as a journalist 
-                and government communications professional, he helps teams develop the observational 
-                skills that lead to better decision-making.
+                James brings his unique perspective to organizations seeking authentic leadership and effective communication strategies. 
+                Drawing from his experience as a journalist and government communications professional, he helps teams develop the 
+                observational skills that lead to better decision-making.
               </p>
             </motion.div>
             
@@ -123,9 +126,9 @@ const Speaking = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex justify-center"
             >
-              <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1751698232217-james%20brown%20speaking%20at%20a%20conference.jpg" 
-                alt="James Brown Speaking at Conference" 
+              <img
+                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1751698232217-james%20brown%20speaking%20at%20a%20conference.jpg"
+                alt="James Brown Speaking at Conference"
                 className="rounded-lg shadow-xl max-w-md w-full"
               />
             </motion.div>
@@ -136,7 +139,7 @@ const Speaking = () => {
       {/* Speaking Experience */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -144,9 +147,9 @@ const Speaking = () => {
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Speaking Experience</h2>
             <div className="flex justify-center mb-6">
-              <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1751698220433-James%20brown%20on%20a%20panel%20at%20a%20conference.jpg" 
-                alt="James Brown on Panel" 
+              <img
+                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1751698220433-James%20brown%20on%20a%20panel%20at%20a%20conference.jpg"
+                alt="James Brown on Panel"
                 className="rounded-lg shadow-lg max-w-lg w-full"
               />
             </div>
@@ -161,7 +164,7 @@ const Speaking = () => {
       {/* Speaking Topics */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -169,7 +172,7 @@ const Speaking = () => {
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Speaking Topics</h2>
           </motion.div>
-
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {speakingTopics.map((topic, index) => (
               <motion.div
@@ -196,7 +199,7 @@ const Speaking = () => {
           </div>
 
           {/* Training Formats */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -217,7 +220,7 @@ const Speaking = () => {
           </motion.div>
 
           {/* Investment */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -233,7 +236,7 @@ const Speaking = () => {
       {/* Contact Form */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -244,106 +247,152 @@ const Speaking = () => {
           </motion.div>
 
           {submitStatus === 'success' && (
-            <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
-              <p className="text-green-800">Thank you! Your message has been sent successfully.</p>
-            </div>
-          )}
-          
-          {submitStatus === 'error' && (
-            <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
-              <p className="text-red-800">Sorry, there was an error sending your message. Please try again.</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-green-50 border border-green-200 rounded-md p-6 mb-6 text-center"
+            >
+              <SafeIcon icon={FiCheck} className="text-green-600 text-4xl mx-auto mb-2" />
+              <p className="text-green-800 font-semibold">Thank you for your interest!</p>
+              <p className="text-green-700 text-sm mt-1">
+                Your speaking inquiry has been received. James will review your request and respond within 24-48 hours.
+              </p>
+            </motion.div>
           )}
 
-          <motion.form 
+          {submitStatus === 'error' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-red-50 border border-red-200 rounded-md p-6 mb-6 text-center"
+            >
+              <p className="text-red-800 font-semibold">Sorry, there was an error sending your message.</p>
+              <p className="text-red-700 text-sm mt-1">Please try again or contact us directly at support@thedailynote.net</p>
+            </motion.div>
+          )}
+
+          {/* Hidden form for Netlify */}
+          <form name="speaking" netlify netlify-honeypot="bot-field" hidden>
+            <input type="text" name="inquiry-type" />
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <textarea name="message"></textarea>
+          </form>
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            onSubmit={handleSubmit}
-            name="speaking-inquiry" 
-            method="POST" 
-            data-netlify="true" 
-            netlify-honeypot="bot-field"
             className="bg-white p-8 rounded-lg shadow-lg"
           >
-            <input type="hidden" name="form-name" value="speaking-inquiry" />
-            <p hidden>
-              <label>Don't fill this out: <input name="bot-field" /></label>
-            </p>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Inquiry Type
-              </label>
-              <select 
-                name="inquiryType"
-                value={formData.inquiryType}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              >
-                <option value="">Select inquiry type</option>
-                <option value="comment">Comment on the show</option>
-                <option value="press">Press inquiry</option>
-                <option value="speaking">Speaking engagement</option>
-                <option value="advertising">Advertising/Sponsorship</option>
-                <option value="course">Course question</option>
-                <option value="general">General inquiry</option>
-                <option value="technical">Technical support</option>
-              </select>
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Name
-              </label>
-              <input 
-                type="text" 
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Email
-              </label>
-              <input 
-                type="email" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Message
-              </label>
-              <textarea 
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              ></textarea>
-            </div>
-
-            <button 
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-orange-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center disabled:opacity-50"
+            <form
+              name="speaking"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
             >
-              <SafeIcon icon={FiSend} className="mr-2" />
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </motion.form>
+              <input type="hidden" name="form-name" value="speaking" />
+              <div className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Inquiry Type
+                </label>
+                <select
+                  name="inquiry-type"
+                  value={formData['inquiry-type']}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                >
+                  <option value="">Select inquiry type</option>
+                  <option value="speaking">Speaking engagement</option>
+                  <option value="training">Corporate training</option>
+                  <option value="workshop">Workshop facilitation</option>
+                  <option value="keynote">Keynote presentation</option>
+                  <option value="coaching">Executive coaching</option>
+                  <option value="general">General inquiry</option>
+                </select>
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Message
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  placeholder="Please include details about your event, audience size, date, location, and any specific topics you'd like James to address."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                ></textarea>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-orange-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center disabled:opacity-50"
+                >
+                  <SafeIcon icon={FiSend} className="mr-2" />
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
+              </div>
+            </form>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-8 text-center"
+          >
+            <p className="text-gray-600 mb-2">
+              Prefer to reach out directly?
+            </p>
+            <a
+              href="mailto:support@thedailynote.net"
+              className="text-orange-600 hover:text-orange-800 font-medium"
+            >
+              support@thedailynote.net
+            </a>
+          </motion.div>
         </div>
       </section>
     </div>
